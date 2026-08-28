@@ -94,7 +94,7 @@ export default function AdminModal({ isOpen, onClose, onLoginSuccess }: Props) {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  placeholder="admin@cwsi.gov.ph"
+                  placeholder=""
                   className="w-full pl-9 pr-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50/50"
                 />
               </div>
@@ -111,7 +111,7 @@ export default function AdminModal({ isOpen, onClose, onLoginSuccess }: Props) {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  placeholder="••••••••"
+                  placeholder=""
                   className="w-full pl-9 pr-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50/50"
                 />
               </div>

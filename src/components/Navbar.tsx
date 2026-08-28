@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import logoImg from "@/imports/image.png";
+import logoImg from "/image.png";
 import { Menu, X, Droplets, ChevronRight } from "lucide-react";
 
 const navLinks = [

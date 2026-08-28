@@ -1,4 +1,4 @@
-import logoImg from "@/imports/image.png";
+import logoImg from "/image.png";
 import { MapPin, Phone, Mail, Clock, ShieldCheck } from "lucide-react";
 
 const quickLinks = [

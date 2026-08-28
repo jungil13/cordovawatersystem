@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import heroImg from "@/imports/hero.png";
+import heroImg from "/hero.png";
 import { Droplet, ShieldCheck, Clock, Award, ArrowRight, Calculator } from "lucide-react";
 
 const stats = [

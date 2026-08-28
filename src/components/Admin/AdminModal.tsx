@@ -9,8 +9,8 @@ interface Props {
 }
 
 export default function AdminModal({ isOpen, onClose, onLoginSuccess }: Props) {
-  const [email, setEmail] = useState("admin@cwsi.gov.ph");
-  const [password, setPassword] = useState("admin12345");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -28,20 +28,12 @@ export default function AdminModal({ isOpen, onClose, onLoginSuccess }: Props) {
           password: password,
         });
 
-        if (error) {
-          // If custom user not created in auth yet, fallback allow standard manager auth for convenience
-          if (email === "admin@cwsi.gov.ph" || email === "admin@cordova.gov.ph") {
-            onLoginSuccess(email);
-            return;
-          }
-          throw error;
-        }
+        if (error) throw error;
 
         onLoginSuccess(data.user?.email || email);
         return;
       }
 
-      // Default authorized access
       onLoginSuccess(email);
     } catch (err: any) {
       setErrorMsg(err.message || "Invalid admin login credentials.");
@@ -94,7 +86,7 @@ export default function AdminModal({ isOpen, onClose, onLoginSuccess }: Props) {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  placeholder=""
+                  placeholder="Enter admin email"
                   className="w-full pl-9 pr-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50/50"
                 />
               </div>
@@ -111,7 +103,7 @@ export default function AdminModal({ isOpen, onClose, onLoginSuccess }: Props) {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  placeholder=""
+                  placeholder="••••••••"
                   className="w-full pl-9 pr-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50/50"
                 />
               </div>

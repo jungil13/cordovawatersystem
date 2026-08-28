@@ -51,8 +51,8 @@ export default function AdminPage({ onExit }: Props) {
   const [adminUser, setAdminUser] = useState<string | null>(
     typeof window !== "undefined" ? sessionStorage.getItem("cwsi_auth_user") : null
   );
-  const [loginEmail, setLoginEmail] = useState("admin@cwsi.gov.ph");
-  const [loginPassword, setLoginPassword] = useState("admin12345");
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
   const [authLoading, setAuthLoading] = useState(false);
   const [authError, setAuthError] = useState("");
 
@@ -119,7 +119,7 @@ export default function AdminPage({ onExit }: Props) {
     }
   }, [adminUser]);
 
-  // Auth Handler
+  // handleLogin - remove fallback hardcoded account
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setAuthLoading(true);
@@ -132,15 +132,7 @@ export default function AdminPage({ onExit }: Props) {
           password: loginPassword,
         });
 
-        if (error) {
-          // If custom user not created in auth yet, fallback allow standard manager auth
-          if (loginEmail === "admin@cwsi.gov.ph" || loginEmail === "admin@cordova.gov.ph") {
-            setAdminUser(loginEmail);
-            sessionStorage.setItem("cwsi_auth_user", loginEmail);
-            return;
-          }
-          throw error;
-        }
+        if (error) throw error;
 
         const email = data.user?.email || loginEmail;
         setAdminUser(email);
@@ -148,7 +140,6 @@ export default function AdminPage({ onExit }: Props) {
         return;
       }
 
-      // Default authorized access
       setAdminUser(loginEmail);
       sessionStorage.setItem("cwsi_auth_user", loginEmail);
     } catch (err: any) {
@@ -162,7 +153,7 @@ export default function AdminPage({ onExit }: Props) {
     setAdminUser(null);
     sessionStorage.removeItem("cwsi_auth_user");
     if (supabase) {
-      supabase.auth.signOut().catch(() => {});
+      supabase.auth.signOut().catch(() => { });
     }
   };
 
@@ -405,7 +396,7 @@ export default function AdminPage({ onExit }: Props) {
                     value={loginEmail}
                     onChange={(e) => setLoginEmail(e.target.value)}
                     required
-                    placeholder="admin@cwsi.gov.ph"
+                    placeholder="Enter Email Address"
                     className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50/50"
                   />
                 </div>
@@ -422,7 +413,7 @@ export default function AdminPage({ onExit }: Props) {
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
                     required
-                    placeholder="••••••••"
+                    placeholder="Enter Password"
                     className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50/50"
                   />
                 </div>
@@ -516,20 +507,18 @@ export default function AdminPage({ onExit }: Props) {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`w-full px-3.5 py-3 rounded-xl text-xs font-bold flex items-center justify-between transition-all cursor-pointer ${
-                    active
+                  className={`w-full px-3.5 py-3 rounded-xl text-xs font-bold flex items-center justify-between transition-all cursor-pointer ${active
                       ? "bg-blue-600 text-white shadow-lg shadow-blue-600/30"
                       : "text-slate-300 hover:bg-slate-800/60 hover:text-white"
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center gap-3">
                     <Icon className="w-4 h-4" />
                     <span>{tab.label}</span>
                   </div>
                   <span
-                    className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full ${
-                      active ? "bg-white text-blue-700" : "bg-slate-800 text-slate-400"
-                    }`}
+                    className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full ${active ? "bg-white text-blue-700" : "bg-slate-800 text-slate-400"
+                      }`}
                   >
                     {tab.count}
                   </span>
@@ -567,12 +556,12 @@ export default function AdminPage({ onExit }: Props) {
               {activeTab === "inquiries"
                 ? "Customer Inquiries & Service Applications"
                 : activeTab === "news"
-                ? "News & Community Announcements"
-                : activeTab === "gallery"
-                ? "Infinite Carousel Gallery Media"
-                : activeTab === "team"
-                ? "Key Personnel & Staff Profiles"
-                : "Water Consumption Tariff Slabs"}
+                  ? "News & Community Announcements"
+                  : activeTab === "gallery"
+                    ? "Infinite Carousel Gallery Media"
+                    : activeTab === "team"
+                      ? "Key Personnel & Staff Profiles"
+                      : "Water Consumption Tariff Slabs"}
             </h2>
             <p className="text-xs text-slate-500">
               Direct live sync with Supabase cloud database.
@@ -651,13 +640,12 @@ export default function AdminPage({ onExit }: Props) {
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
                         <div className="flex items-center gap-3">
                           <span
-                            className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                              inq.type === "Application"
+                            className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${inq.type === "Application"
                                 ? "bg-blue-100 text-blue-800"
                                 : inq.type === "Billing"
-                                ? "bg-emerald-100 text-emerald-800"
-                                : "bg-purple-100 text-purple-800"
-                            }`}
+                                  ? "bg-emerald-100 text-emerald-800"
+                                  : "bg-purple-100 text-purple-800"
+                              }`}
                           >
                             {inq.type}
                           </span>
@@ -705,15 +693,14 @@ export default function AdminPage({ onExit }: Props) {
                               <button
                                 key={st}
                                 onClick={() => handleUpdateInquiryStatus(inq.id, st)}
-                                className={`px-3 py-1.5 rounded-xl text-[11px] font-bold transition-all cursor-pointer ${
-                                  inq.status === st
+                                className={`px-3 py-1.5 rounded-xl text-[11px] font-bold transition-all cursor-pointer ${inq.status === st
                                     ? st === "Resolved"
                                       ? "bg-emerald-600 text-white shadow-sm"
                                       : st === "Pending"
-                                      ? "bg-amber-500 text-white shadow-sm"
-                                      : "bg-blue-600 text-white shadow-sm"
+                                        ? "bg-amber-500 text-white shadow-sm"
+                                        : "bg-blue-600 text-white shadow-sm"
                                     : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                                }`}
+                                  }`}
                               >
                                 {st}
                               </button>

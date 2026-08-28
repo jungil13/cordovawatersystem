@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --color-primary: #0d47a1;
+  --color-primary-dark: #082d6e;
+  --color-primary-light: #1565c0;
+  --color-secondary: #0288d1;
+  --color-secondary-light: #29b6f6;
+  --color-accent: #e0f2fe;
+  --color-water: #00acc1;
+  --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Outfit', system-ui, sans-serif;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: #1e293b;
+  background: #f8fafc;
+  font-size: 0.925rem;
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #38bdf8;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0288d1;
+}
+
+/* Marquee infinite looping animation for Gallery */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Typewriter blinking cursor */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-cursor {
+  display: inline-block;
+  width: 3px;
+  background-color: #38bdf8;
+  animation: blink 0.9s infinite;
+  margin-left: 3px;
+}
+
+/* Scroll reveal utility */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Subtle Water Glow */
+.water-gradient-card {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+}
+
+.water-glow {
+  box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.35);
+}

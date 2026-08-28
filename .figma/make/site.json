@@ -1,0 +1,11 @@
+{
+  "title": "Cordova Water System Inc.",
+  "description": "Provides comprehensive information about Cordova Water System Inc., showcasing services, team, news, and contact details for customer engagement.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

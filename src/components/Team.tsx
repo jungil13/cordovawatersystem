@@ -35,8 +35,8 @@ export default function Team() {
               key={member.id}
               className="flex flex-col items-center text-center group"
             >
-              {/* Photo without gradient fade */}
-              <div className="w-full aspect-[4/5] sm:h-72 overflow-hidden flex items-end justify-center mb-4">
+              {/* Photo */}
+              <div className="w-48 h-64 sm:w-full sm:h-72 overflow-hidden flex items-start justify-center mb-4 rounded-md">
                 <img
                   src={member.img}
                   alt={member.name}

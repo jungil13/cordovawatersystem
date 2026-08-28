@@ -4,8 +4,11 @@
   "robots": {
     "index": false
   },
+  "favicon": "/meta-image.png",
+  "ogImage": "/meta-image.png",
   "accessibility": {
     "addBypassLinks": false,
     "ignoreReducedMotion": false
   }
 }
+
